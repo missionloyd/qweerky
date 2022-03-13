@@ -1,7 +1,7 @@
-## qweerky
-# Your favorite music suggestions app
+# qweerky
+Your favorite music suggestions app
 
-# Assumptions before setup (macOS)
+## Assumptions before setup (macOS)
 
 Homebrew is installed along with npm and postgresql
   - Install command located in: [https://brew.sh/]
@@ -12,7 +12,7 @@ brew install npm@8.4.0
 brew install postgresql@14
 ```
 
-# Assumptions before setup (Windows)
+## Assumptions before setup (Windows)
 
 PostgreSQL is installed (v14)
   - [https://www.postgresql.org/download/]
@@ -20,7 +20,7 @@ PostgreSQL is installed (v14)
 npm (8.4.0) is installed
   - [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm]
 
-# One more Assumption (any OS)
+## One more Assumption (any OS)
 
 Node (v16.9.1) is installed
   - [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm]
@@ -47,7 +47,7 @@ cd backend/
 npm i --save
 ```
 
-## Running Locally (/qweerky)
+# Running Locally (/qweerky)
 
 First, run the Node.js development server:
 
