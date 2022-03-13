@@ -14,7 +14,7 @@ brew install postgresql@14
 
 ## Assumptions before setup (Windows)
 
-PostgreSQL is installed (v14)
+PostgreSQL (14) is installed
   - [https://www.postgresql.org/download/]
 
 npm (8.4.0) is installed
