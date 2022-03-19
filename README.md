@@ -8,7 +8,8 @@ Homebrew is installed along with npm and postgresql
   - Brew is used to install npm & postgresql
 
 ```bash
-brew install npm@8.4.0
+brew install npm
+npm install -g npm@8.4.0
 brew install postgresql@14
 ```
 
