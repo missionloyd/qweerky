@@ -8,8 +8,8 @@ Homebrew is installed along with npm and postgresql
   - Brew is used to install npm & postgresql
 
 ```bash
-brew install npm
-npm install -g npm@8.4.0
+brew install nvm
+nvm install 16.9.1
 brew install postgresql@14
 ```
 
@@ -18,20 +18,20 @@ brew install postgresql@14
 PostgreSQL (14) is installed
   - [https://www.postgresql.org/download/]
 
-npm (8.4.0) is installed
+npm (7.21.1) & Node (v16.9.1) is installed with NVM
   - [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm]
 
-## One more Assumption (any OS)
+## Switching npm versions
 
-Node (v16.9.1) is installed
-  - [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm]
-
+```bash
+npm install -g npm@7.21.1
+```
 
 ## Check Requirements
 
 ```bash
 npm --version
-  - (8.4.0)
+  - (7.21.1)
 node --version
   - (v16.9.1)
 brew --version
