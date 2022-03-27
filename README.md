@@ -79,15 +79,6 @@ Also in setup-backend, please modify following in (/qweerky/setup-backend/setup_
 
 COPY song FROM '/home/pi/dev/CSE-412/qweerky/setup-backend/data/songs.csv' DELIMITER ',' CSV HEADER;  =>  COPY song FROM 'your/path' DELIMITER ',' CSV HEADER;
 
-## Check permissions one more time
-
-```bash
-psql -d qweerky
-CREATE ROLE qweerky WITH LOGIN PASSWORD 'root';
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO qweerky;
-\q
-```
-
 ## Then, run the following command:
 
 ```bash

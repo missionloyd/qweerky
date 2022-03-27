@@ -20,6 +20,8 @@ setup_postgres:
 	psql -d qweerky -q -f setup_postgres/populate_db.sql	
 	@echo "importing data"
 	psql -d qweerky -q -f setup_postgres/import_data.sql
+	@echo "granting table privileges to qweerky"
+	psql -d qweerky -q -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO qweerky;"
 	@echo "test, count the song table, the result should be 25"
 	psql -d qweerky -q -c "SELECT count(*) FROM song;"
 
