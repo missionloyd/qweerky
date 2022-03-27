@@ -29,6 +29,8 @@ npm install -g npm@7.21.1
 
 ## Check Requirements
 
+Note: brew only needs to be installed on macOS
+
 ```bash
 npm --version
   - (7.21.1)
@@ -48,6 +50,50 @@ cd backend/
 npm i --save
 ```
 
+# Creating a Postgres database
+
+```bash
+sudo chmod a+w /var/run/postgresql
+export PATH=$PATH:/usr/lib/postgresql/14/bin/
+export PGPORT=8888
+export PGHOST=/tmp
+initdb $HOME/db412
+pg_ctl -D $HOME/db412 -o '-k /tmp' start
+createdb qweerky
+```
+
+# Connect to the created database and create role
+```bash
+psql -d qweerky
+CREATE ROLE qweerky WITH LOGIN PASSWORD 'root';
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO qweerky;
+\q
+```
+
+# Add tables to created database (/qweerky/setup-backend)
+In setup-backend please modify following in the (/qweerky/setup-backend/makefile): 
+
+MAKEFILE_PATH = /home/pi/dev/CSE-412/qweerky/setup-backend   =>  MAKEFILE_PATH = your/path
+
+Also in setup-backend, please modify following in (/qweerky/setup-backend/setup_postgres/import_data.sql): 
+
+COPY song FROM '/home/pi/dev/CSE-412/qweerky/setup-backend/data/songs.csv' DELIMITER ',' CSV HEADER;  =>  COPY song FROM 'your/path' DELIMITER ',' CSV HEADER;
+
+## Check permissions one more time
+
+```bash
+psql -d qweerky
+CREATE ROLE qweerky WITH LOGIN PASSWORD 'root';
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO qweerky;
+\q
+```
+
+## Then, run the following command:
+
+```bash
+make setup_postgres
+```
+
 # Running Locally (/qweerky)
 
 First, run the Node.js development server:
@@ -57,6 +103,7 @@ node backend/index.js
 ```
 
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the backend-end result.
+
 
 Then, open another terminal and run Next.js development server:
 

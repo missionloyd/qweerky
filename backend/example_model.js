@@ -1,12 +1,26 @@
 const Pool = require('pg').Pool
 
 const pool = new Pool({
-  user: 'my_user',
+  user: 'qweerky',
   host: 'localhost',
-  database: 'my_database',
+  database: 'qweerky',
   password: 'root',
-  port: 5432,
+  port: 8888,
 });
+
+const getNationCount = () => {
+
+  const SQL = 'SELECT * from Song'
+
+  return new Promise(function(resolve, reject) {
+    pool.query(SQL, (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(results);
+    })
+  }) 
+}
 
 const getMerchants = () => {
   return new Promise(function(resolve, reject) {
@@ -46,7 +60,8 @@ const deleteMerchant = (merchantId) => {
 }
 
 module.exports = {
-  getMerchants,
-  createMerchant,
-  deleteMerchant,
+  getNationCount,
+  // getMerchants,
+  // createMerchant,
+  // deleteMerchant,
 }
