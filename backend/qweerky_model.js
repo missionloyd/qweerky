@@ -47,7 +47,12 @@ const playlist = () => {
   }) 
 }
 
-// (1.5pt) DEMO two selection queries
+
+/*
+1. 
+  (Select) Returns all songs and the 
+  artist name with id=1
+*/
 const SELECT1 = "SELECT Song.s_title as song_name, Artist.ar_primaryName as artist_name FROM Song, Artist WHERE s_arid=1 and artist.arid = 1 GROUP BY song_name, artist_name;"
 
 const select1 = () => {
@@ -61,7 +66,13 @@ const select1 = () => {
   }) 
 }
 
-const SELECT2 = "SELECT playlist.p_name, song.s_title, song.sid, artist.ar_primaryName FROM playlist, playlist_songs, song, artist WHERE playlist.p_name LIKE '%relax%' and playlist_songs.s_sid = song.sid 					and playlist.pid = playlist_songs.p_pid and song.s_arid = artist.arid;"
+/*
+2. 
+  (Select) Returns the playlist name 
+  and user name of all users who have made
+  a playlist
+*/
+const SELECT2 = "SELECT Playlist.p_name as p_name, Listener.u_primaryName as u_name FROM Playlist, Listener WHERE uid=p_uid GROUP BY p_name, u_name;"
 
 const select2 = () => {
   return new Promise(function(resolve, reject) {
@@ -75,7 +86,11 @@ const select2 = () => {
 }
 
 
-// (1pt) DEMO : Insert Query
+/*
+3. 
+  (Insert) Inserts a new song to the 
+  playlist with the given playlist id
+*/
 const INSERT = "INSERT INTO playlist_songs(p_pid, s_sid) VALUES ('1','9');"
 
 const insert1 = () => {
@@ -89,8 +104,11 @@ const insert1 = () => {
   }) 
 }
 
-
-// (1pt) DEMO : Update Query
+/*
+4. 
+  (Update) Updates the playlist with 
+  id ‘1’ to the name given in the keyword
+*/
 const UPDATE = "UPDATE playlist SET p_name = 'music to relax to' WHERE pid = 1;"
 
 const update1 = () => {
@@ -104,7 +122,11 @@ const update1 = () => {
   }) 
 }
 
-// (0.5pt) DEMO : Delete Query
+/*
+5. 
+  (Delete) Deletes all songs by the artist 
+  in the given keyword from the playlist with id ‘1’
+*/
 const DELETE = "DELETE FROM playlist_songs as d WHERE d.p_pid = 1 and d.s_sid IN (SELECT song.sid FROM song, artist WHERE song.s_arid = artist.arid and artist.ar_primaryName like '%Weekend%');"
 
 const delete1 = () => {

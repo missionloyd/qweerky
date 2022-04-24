@@ -21,6 +21,12 @@ PostgreSQL (14) is installed
 npm (7.21.1) & Node (v16.9.1) is installed with NVM
   - [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm]
 
+## Switching Node versions with nvm
+
+```bash
+nvm use 16
+```
+
 ## Switching npm versions
 
 ```bash
@@ -51,6 +57,7 @@ npm i --save
 ```
 
 # Creating a Postgres database
+- Paths and commands will be different for you, here's an example:
 
 ```bash
 sudo chmod a+w /var/run/postgresql
