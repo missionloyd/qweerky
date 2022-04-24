@@ -7,37 +7,71 @@ import HomeIcon from '@material-ui/icons/Home';
 import ExploreIcon from '@material-ui/icons/Explore';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
-import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import LinkIcon from '@material-ui/icons/Link';
+import { useRouter } from "next/router";
+import { makeStyles } from '@material-ui/core/styles';
+import pageNames from './pageNames.json';
+import { List } from '@material-ui/core';
+import Link from 'next/link';
 
-export const mainListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Home" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <QueueMusicIcon />
-      </ListItemIcon>
-      <ListItemText primary="Library" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LibraryMusicIcon />
-      </ListItemIcon>
-      <ListItemText primary="Playlists" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ExploreIcon />
-      </ListItemIcon>
-      <ListItemText primary="Explore" />
-    </ListItem>
-  </div>
+const useStyles = makeStyles({
+  inactive: {
+    transition: 'all 0.2s',
+    '&:hover': {
+      backgroundColor: '#f5f5f5' 
+    },
+  },  
+  active: {
+    backgroundColor: '#eeeeee'
+  },
+})
+
+const IconManager = ({name, className}) => {
+
+  return(    
+    name == "Home" &&
+      <HomeIcon className={className} />
+    ||
+    name == "Library" &&
+      <QueueMusicIcon className={className} />
+    ||
+    name == "Playlists" &&
+      <LibraryMusicIcon className={className} />
+    ||
+    name == "Explore" &&
+      <ExploreIcon className={className} />
+    ||
+      <LinkIcon className={className} />
+  )
+}
+
+export const MainListItems = () => {
+  const classes = useStyles();
+  const router = useRouter();
+  
+  return(
+  <List>
+   {pageNames.map((item, key) => {
+      return (
+        <div 
+          className={router.pathname == item.link ? classes.active : classes.inactive}
+          key={key}
+        >
+          <Link href={item.link} passHref>
+            <ListItem button component="a">
+              <ListItemIcon>
+                <IconManager name={item.name} className={router.pathname == item.link ? classes.active : classes.inactive} />
+              </ListItemIcon>
+              <ListItemText primary={item.name}/>
+            </ListItem>
+          </Link>
+        </div>
+      )
+    })}
+  </List>
 );
+}
 
 export const secondaryListItems = (
   <div>

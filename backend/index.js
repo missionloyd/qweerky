@@ -27,6 +27,16 @@ app.get('/', (req, res) => {
   })
 });
 
+app.get('/songs', (req, res) => {
+  qweerky_model.root()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+});
+
 /*
 Playlist. 
   (Select) Returns all songs and the 

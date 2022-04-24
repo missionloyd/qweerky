@@ -86,7 +86,7 @@ Also in setup-backend, please modify following in (/qweerky/setup-backend/setup_
 
 COPY song FROM '/home/pi/dev/CSE-412/qweerky/setup-backend/data/songs.csv' DELIMITER ',' CSV HEADER;  =>  COPY song FROM 'your/path' DELIMITER ',' CSV HEADER;
 
-## Then, run the following command:
+## Then, run the following command in (/qweerky/setup-backend): 
 
 ```bash
 make setup_postgres

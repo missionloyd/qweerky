@@ -10,15 +10,15 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems, secondaryListItems } from './listItems';
+import { MainListItems, secondaryListItems } from './listItems';
 import { Avatar, Hidden } from '@material-ui/core';
+import { Router, useRouter } from 'next/router';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -75,6 +75,15 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontWeight: 'bold',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    color: 'white',
+    textDecoration: 'none',
+    '&:hover': {
+      // textDecoration: 'underline',
+      cursor: 'pointer',
+    },
   },
   drawerPaper: {
     position: 'relative',
@@ -124,12 +133,19 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const router = useRouter();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleClick = () => {
+    router.push('/home');
+  }
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -146,9 +162,15 @@ export default function Dashboard({ children }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <a
+            className={classes.title}
+            onClick={handleClick}
+          >
             Qweerky
-          </Typography>
+          </a>
+          {/* <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+            Qweerky
+          </Typography> */}
           <IconButton color="inherit">
             {/* <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
@@ -170,7 +192,7 @@ export default function Dashboard({ children }) {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <MainListItems />
         <Divider />
         {/* <List>{secondaryListItems}</List> */}
       </Drawer>

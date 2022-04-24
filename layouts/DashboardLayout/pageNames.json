@@ -1,0 +1,22 @@
+[
+  { 
+  "name": "Home",
+  "link": "/home",
+  "slug": false
+  },
+  {
+    "name": "Library",
+    "link": "/library",
+    "slug": false
+  },
+  {
+    "name": "Playlists",
+    "link": "/playlists",
+    "slug": false
+  },
+  {
+    "name": "Explore",
+    "link": "/explore",
+    "slug": false
+  }
+]
