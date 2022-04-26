@@ -8,7 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../styles/theme';
 import { UserContext } from '../lib/context';
 import PageChange from "../components/shared/PageChange.js";
-import { useUserData } from '../lib/hooks/auth-hook';
+import { useAuth } from '../lib/hooks/auth-hook';
 import toast, { Toaster } from 'react-hot-toast';
 
 Router.events.on("routeChangeStart", (url) => {
@@ -31,7 +31,7 @@ Router.events.on("routeChangeError", () => {
 export default function MyApp(props){
   const { Component, pageProps } = props;
   const Layout = Component.layout || (({children}) => <>{children}</>);
-  const userData = useUserData();
+  const { username, login, logout, uid } = useAuth();
   const router = useRouter();
 
   // scroll to top when route changes
@@ -56,7 +56,13 @@ export default function MyApp(props){
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <UserContext.Provider value={ userData }>
+        <UserContext.Provider value={{
+          isLoggedIn: !!username,
+          uid: uid,
+          username: username,
+          login: login,
+          logout: logout
+        }}>
           <Layout>
             <Component {...pageProps} />
           </Layout>

@@ -19,6 +19,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { MainListItems, secondaryListItems } from './listItems';
 import { Avatar, Hidden } from '@material-ui/core';
 import { Router, useRouter } from 'next/router';
+import AuthCheck from '../../components/auth/AuthCheck';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -175,7 +176,11 @@ export default function Dashboard({ children }) {
             {/* <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge> */}
-            <Avatar className={classes.small} src={null}/>
+            <Link
+              href='auth'
+            >
+              <Avatar className={classes.small} src={null}/>   
+            </Link>
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -219,7 +224,9 @@ export default function Dashboard({ children }) {
           <Box pt={4}>
             <Copyright />
           </Box> */}
-          { children }
+          <AuthCheck>
+            { children }
+          </AuthCheck>
         </Container>
       </main>
     </div>

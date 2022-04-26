@@ -69,7 +69,7 @@ pg_ctl -D $HOME/db412 -o '-k /tmp' start
 createdb qweerky
 ```
 
-# Connect to the created database and create role
+## Connect to the created database and create role
 ```bash
 psql -d qweerky
 CREATE ROLE qweerky WITH LOGIN PASSWORD 'root';
@@ -77,14 +77,16 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO qweerky;
 \q
 ```
 
-# Add tables to created database (/qweerky/setup-backend)
+## Add tables to created database (/qweerky/setup-backend)
 In setup-backend please modify following in the (/qweerky/setup-backend/makefile): 
 
-MAKEFILE_PATH = /home/pi/dev/CSE-412/qweerky/setup-backend   =>  MAKEFILE_PATH = your/path
+MAKEFILE_PATH = /home/pi/dev/CSE-412/qweerky/setup-backend
+  - MAKEFILE_PATH = your/path
 
 Also in setup-backend, please modify following in (/qweerky/setup-backend/setup_postgres/import_data.sql): 
 
-COPY song FROM '/home/pi/dev/CSE-412/qweerky/setup-backend/data/songs.csv' DELIMITER ',' CSV HEADER;  =>  COPY song FROM 'your/path' DELIMITER ',' CSV HEADER;
+COPY song FROM '/home/pi/dev/CSE-412/qweerky/setup-backend/data/songs.csv' DELIMITER ',' CSV HEADER;  
+  - COPY song FROM 'your/path' DELIMITER ',' CSV HEADER;
 
 ## Then, run the following command in (/qweerky/setup-backend): 
 

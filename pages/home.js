@@ -2,8 +2,11 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Page from '../components/shared/Page'
 import Dashboard from '../layouts/DashboardLayout/Dashboard'
+import { useContext } from 'react'
+import { UserContext } from '../lib/context'
 
 function Home() {
+  const auth = useContext(UserContext);
 
   return (
     <Page 
@@ -40,7 +43,7 @@ function Home() {
             </a>
 
             <a
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+              onClick={e => auth.logout()}
               className={styles.card}
             >
               <h2>Logout &rarr;</h2>

@@ -1,35 +1,26 @@
 import { useEffect, useState } from 'react';
+import { getPlaylistByPid } from '../backend/queries';
 import Page from '../components/shared/Page';
 import Dashboard from '../layouts/DashboardLayout/Dashboard';
 
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
+//   const { slug } = context.params;
   
-  let res = null;
-
-  await fetch(process.env.API_URL)
-    .then(response => {
-      return response.text();
-    })
-    .then(data => {
-      res = data;
-    });
-
-  return {
-    props: { 
-      res: JSON.parse(res)
-     }
-  };
-}
+//   return {
+//     props: { 
+//       res: await getPlaylistByPid(slug)
+//      }
+//   };
+// }
 
 
-function Library({ res }) {
+function Library() {
   const [songs, setSongs] = useState([]);
 
   useEffect(() => {
-    if(res && res?.rows) {
-      setSongs(res.rows);
+    if(res) {
+      // setSongs(res);
     }
-    console.log(songs);
   }, []);
 
   return (
