@@ -59,6 +59,15 @@ const getSongs = (request, response) => {
   })
 }
 
+const getAlbums = (request, response) => {
+  pool.query('SELECT * FROM Album', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 const getPlaylists = (request, response) => {
   pool.query('SELECT * FROM Playlist', (error, results) => {
     if (error) {
@@ -78,7 +87,7 @@ const getPlaylistSongs = (request, response) => {
 }
 
 const getPlaylistByPid = (request, response) => {
-  const uid = request.params.pid
+  const pid = request.params.pid
   // console.log(request.params.arid)
 
   pool.query('SELECT * FROM Playlist WHERE p_uid = $1', [pid], (error, results) => {
@@ -89,11 +98,11 @@ const getPlaylistByPid = (request, response) => {
   })
 }
 
-const getSongFromPlaylistByPid = (request, response) => {
+const getSongsFromPlaylistByPid = (request, response) => {
   const pid = request.params.pid
   // console.log(request.params.arid)
 
-  pool.query('SELECT * FROM Playlist_Songs WHERE p_pid = $1', [pid], (error, results) => {
+  pool.query('SELECT * FROM Song, Playlist_Songs WHERE Playlist_Songs.p_pid = $1 AND Song.sid = Playlist_Songs.s_sid', [pid], (error, results) => {
     if (error) {
       throw error
     }
@@ -157,6 +166,18 @@ const getUserByUid = (request, response) => {
   })
 }
 
+const getAlbumByAid = (request, response) => {
+  const aid = parseInt(request.params.aid)
+  // console.log(aid)
+
+  pool.query('SELECT * FROM Album WHERE aid = $1', [aid], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 const getUserByName = (request, response) => {
   const username = request.params.username
   // console.log(request.params.username)
@@ -174,6 +195,17 @@ const getArtistById = (request, response) => {
   // console.log(request.params.arid)
 
   pool.query('SELECT * FROM Artist WHERE arid = $1', [arid], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getSongById = (request, response) => {
+  const sid = request.params.sid
+
+  pool.query('SELECT * FROM Song WHERE sid = $1', [sid], (error, results) => {
     if (error) {
       throw error
     }
@@ -214,36 +246,12 @@ module.exports = {
   createPlaylist,
   getPlaylists,
   getPlaylistByPid,
-  getSongFromPlaylistByPid,
+  getSongsFromPlaylistByPid,
   addPlaylistSongs,
   getAddedSong,
   deleteAddedSong,
-  getPlaylistSongs
+  getPlaylistSongs,
+  getSongById,
+  getAlbums,
+  getAlbumByAid
 }
-
-
-// const createMerchant = (body) => {
-//   return new Promise(function(resolve, reject) {
-//     const { name, email } = body
-
-//     pool.query('INSERT INTO merchants (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
-//       if (error) {
-//         reject(error)
-//       }
-//       resolve(`A new merchant has been added added: ${JSON.stringify(results.rows[0])}`)
-//     })
-//   })
-// }
-
-// const deleteMerchant = (merchantId) => {
-//   return new Promise(function(resolve, reject) {
-//     const id = parseInt(merchantId)
-
-//     pool.query('DELETE FROM merchants WHERE id = $1', [id], (error, results) => {
-//       if (error) {
-//         reject(error)
-//       }
-//       resolve(`Merchant deleted with ID: ${id}`)
-//     })
-//   })
-// }

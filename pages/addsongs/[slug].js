@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import Link from '@material-ui/core/Link';
-import Page from '../components/shared/Page';
-import Dashboard from '../layouts/DashboardLayout/Dashboard';
-import { getAllSongs, getArtistNameWithId } from '../lib/queries';
+import Page from '../../components/shared/Page';
+import Dashboard from '../../layouts/DashboardLayout/Dashboard';
+import { getAllSongs, getArtistNameWithId } from '../../lib/queries';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { SongFeed } from '../components/shared/SongFeed';
+import { SongFeed } from '../../components/shared/SongFeed';
 
 export async function getServerSideProps(context) {
+  const { slug } = context.params;
+
   return {
     props: { 
-      res: await getAllSongs()
+      res: await getAllSongs(),
+      slug: slug
      }
   };
 }
@@ -25,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Explore({ res }) {
+function Explore({ res, slug }) {
   const classes = useStyles();
   const [songs, setSongs] = useState(res);
 
@@ -36,7 +39,7 @@ function Explore({ res }) {
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Songs
       </Typography>
-      <SongFeed res={res} />
+      <SongFeed res={res} slug={slug}/>
     </Page>
   )
 }

@@ -9,6 +9,7 @@ CREATE TABLE Artist
 (
   arid INT NOT NULL,
   ar_primaryName VARCHAR(400) NOT NULL,
+  ar_artistImageURL VARCHAR(15000) NOT NULL,
   PRIMARY KEY (arid)
 );
 
@@ -18,6 +19,7 @@ CREATE TABLE Album
   a_title VARCHAR(400) NOT NULL,
   a_releaseDate VARCHAR(10) NOT NULL,
   a_albumURL VARCHAR(2000) NOT NULL,
+  a_albumArtUrl VARCHAR(15000) NOT NULL,
   PRIMARY KEY (aid)
 );
 

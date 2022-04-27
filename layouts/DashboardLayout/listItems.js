@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import pageNames from './pageNames.json';
 import { List } from '@material-ui/core';
 import Link from 'next/link';
+import { UserContext } from '../../lib/context';
 
 const useStyles = makeStyles({
   inactive: {
@@ -49,19 +50,23 @@ const IconManager = ({name, className}) => {
 export const MainListItems = () => {
   const classes = useStyles();
   const router = useRouter();
+  const { uid } = useContext(UserContext);
   
   return(
   <List>
    {pageNames.map((item, key) => {
+      const modifiedLink = item.slug ? `${item.link}/[slug]` : item.link;
+      const modifiedHref = item.slug ? `${item.link}/${uid}` : item.link;
+
       return (
         <div 
-          className={router.pathname == item.link ? classes.active : classes.inactive}
+          className={router.pathname == modifiedLink ? classes.active : classes.inactive}
           key={key}
         >
-          <Link href={item.link} passHref>
+          <Link href={modifiedHref} passHref>
             <ListItem button component="a">
               <ListItemIcon>
-                <IconManager name={item.name} className={router.pathname == item.link ? classes.active : classes.inactive} />
+                <IconManager name={item.name} className={router.pathname == modifiedLink ? classes.active : classes.inactive} />
               </ListItemIcon>
               <ListItemText primary={item.name}/>
             </ListItem>

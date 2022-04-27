@@ -7,12 +7,12 @@
   {
     "name": "Library",
     "link": "/library",
-    "slug": false
+    "slug": true
   },
   {
     "name": "Playlists",
     "link": "/playlists",
-    "slug": false
+    "slug": true
   },
   {
     "name": "Explore",

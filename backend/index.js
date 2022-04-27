@@ -22,14 +22,21 @@ app.use(function (req, res, next) {
 
 app.get('/', db.getSongs)
 app.get('/songs', db.getSongs)
+app.get('/songs/:sid', db.getSongById)
+
 app.get('/users', db.getUsers)
 app.get('/users/:uid', db.getUserByUid)
 app.get('/users/name/:username', db.getUserByName)
+
+app.get('/albums', db.getAlbums)
+app.get('/album/:aid', db.getAlbumByAid)
+
 app.get('/artist/:arid', db.getArtistById)
+
 app.get('/playlists', db.getPlaylists)
 app.get('/playlists/:pid', db.getPlaylistByPid)
 app.get('/playlists_songs', db.getPlaylistSongs)
-app.get('/playlists_songs/:pid', db.getSongFromPlaylistByPid)
+app.get('/playlists_songs/:pid', db.getSongsFromPlaylistByPid)
 app.get('/playlists_songs/get/:pid/:sid', db.getAddedSong)
 
 app.post('/users', db.createUser)

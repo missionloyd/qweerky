@@ -15,7 +15,7 @@ function Home() {
       <div className={styles.container}>
         <main className={styles.main}>
           <h1 className={styles.title}>
-            Welcome to <a href="https://nextjs.org">Qweerky!</a>
+            Welcome to <a href="#">Qweerky!</a>
           </h1>
 
           <p className={styles.description}>
@@ -24,18 +24,18 @@ function Home() {
           </p>
           <h1>A user's library is just a global playlist</h1>
           <div className={styles.grid}>
-            <a href="https://nextjs.org/docs" className={styles.card}>
+            <a href="#" className={styles.card}>
               <h2>Library &rarr;</h2>
               <p>View all your favorite songs</p>
             </a>
 
-            <a href="https://nextjs.org/learn" className={styles.card}>
+            <a href="#" className={styles.card}>
               <h2>Explore &rarr;</h2>
               <p>Check out new songs!</p>
             </a>
 
             <a
-              href="https://github.com/vercel/next.js/tree/canary/examples"
+              href="#"
               className={styles.card}
             >
               <h2>Playlists &rarr;</h2>
@@ -51,19 +51,6 @@ function Home() {
             </a>
           </div>
         </main>
-
-        <footer className={styles.footer}>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by{' '}
-            <span className={styles.logo}>
-              <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-            </span>
-          </a>
-        </footer>
       </div>
     </Page>
   )

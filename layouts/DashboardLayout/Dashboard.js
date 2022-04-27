@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,6 +20,7 @@ import { MainListItems, secondaryListItems } from './listItems';
 import { Avatar, Hidden } from '@material-ui/core';
 import { Router, useRouter } from 'next/router';
 import AuthCheck from '../../components/auth/AuthCheck';
+import { UserContext } from '../../lib/context';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -135,6 +136,7 @@ export default function Dashboard({ children }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const router = useRouter();
+  const auth = useContext(UserContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -147,6 +149,12 @@ export default function Dashboard({ children }) {
   const handleClick = () => {
     router.push('/home');
   }
+
+  const handleAvatarClick = () => {
+    // auth.logout();
+    // router.push('/auth');
+  }
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -169,18 +177,11 @@ export default function Dashboard({ children }) {
           >
             Qweerky
           </a>
-          {/* <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Qweerky
-          </Typography> */}
-          <IconButton color="inherit">
-            {/* <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge> */}
-            <Link
-              href='auth'
-            >
-              <Avatar className={classes.small} src={null}/>   
-            </Link>
+          <IconButton 
+            color="inherit"
+            onClick={e => handleAvatarClick()}
+          >
+            <Avatar className={classes.small} src={null}/>   
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -199,31 +200,10 @@ export default function Dashboard({ children }) {
         <Divider />
         <MainListItems />
         <Divider />
-        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          {/* <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box> */}
           <AuthCheck>
             { children }
           </AuthCheck>

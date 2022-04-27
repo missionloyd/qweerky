@@ -11,31 +11,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function AddSongButton({ song }) {
+export function AddSongButton({ song, slug }) {
   const classes = useStyles();
   const { uid } = useContext(UserContext);
+  const [pid, setPid] = useState(slug || uid);
   const [added, setAdded] = useState(false);
 
   useEffect(async() => {
 
-    if(uid && song?.sid) {
-      const songs = await getAddedSongs(uid, song?.sid);
+    if(pid && song?.sid) {
+      const songs = await getAddedSongs(pid, song?.sid);
 
       if(songs?.length > 0) {
         setAdded(true);
       }
     }
-  }, [uid]);
+  }, [pid]);
 
   const handleClick = async () => {
-    if(uid, song?.sid) {
+    if(pid, song?.sid) {
       if(!added) {
-        await addPlaylistSongs(uid, song?.sid).then(() => {
+        await addPlaylistSongs(pid, song?.sid).then(() => {
           setAdded(true);
         });
       }
       else {
-        await deletePlaylistSongs(uid, song?.sid).then(() => {
+        await deletePlaylistSongs(pid, song?.sid).then(() => {
           setAdded(false);
         });
       }
