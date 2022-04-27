@@ -31,7 +31,7 @@ function Playlist({ res, slug }) {
 
   return (
     <Page
-      title='Library'
+      title='Playlist'
     >
       <div className={classes.header}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>

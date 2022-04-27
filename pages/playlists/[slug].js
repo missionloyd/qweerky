@@ -39,7 +39,7 @@ function Playlists({ res }) {
 
   return (
     <Page
-      title='Explore'
+      title='Playlists'
     >
       <div className={classes.header}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>

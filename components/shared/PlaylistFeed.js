@@ -29,9 +29,12 @@ export function PlaylistFeed({ res, username }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {playlists?.map(playlist => (
-            <Playlist playlist={playlist} key={playlist?.pid} username={username} />
-          ))}
+          {playlists?.map(playlist => {
+            if(playlist.p_uid != playlist.pid) {
+              return <Playlist playlist={playlist} key={playlist?.pid} username={username} />
+            }
+          }
+          )}
         </TableBody>
       </Table>
     </>

@@ -17,12 +17,13 @@ function Home() {
           <h1 className={styles.title}>
             Welcome to <a href="#">Qweerky!</a>
           </h1>
-
+          
           <p className={styles.description}>
-            Create your first playlist{' '}
-            <code className={styles.code}>qweerky/create</code>
+            Create your first playlist @ {' '}
+            <code className={styles.code}>/playlists/{auth.uid}</code>
           </p>
-          <h1>A user's library is just a global playlist</h1>
+          
+
           <div className={styles.grid}>
             <a href="#" className={styles.card}>
               <h2>Library &rarr;</h2>
